@@ -6,18 +6,18 @@ require 'bigbrotha/version'
 Gem::Specification.new do |spec|
   spec.name          = "bigbrotha"
   spec.version       = BigBrotha::VERSION
-  spec.authors       = ["WF | Snezhana Dichevska"]
+  spec.authors       = ["Snezhana Dichevska"]
   spec.email         = ["snezhana.dichevska@webfactory.mk"]
 
   spec.summary       = %q{Allows you to keep track of posts with taboo words and manage them through admin panel.}
   spec.description   = %q{You can censor all comments and descriptions and any string that should be censored and keep track of the posts that contain taboos and users that used them via admin panel.}
-  spec.homepage      = "http://sorrynohomepage.com"
+  spec.homepage      = "https://github.com/SnezanaDichevska/bigbrotha"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
   if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "Set to 'http://mygemserver.com'"
+    spec.metadata['allowed_push_host'] = "https://rubygems.org"
   else
     raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
   end
@@ -29,5 +29,4 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec"
 end
