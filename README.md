@@ -90,7 +90,7 @@ end
 ```
 ## Additional methods
 Censor class contains additional method with which you can use only to censor text.
-```
+```sh
 >> BigBrotha::Censor.censor_taboos_in_text("This is an example text with few taboos", ["example","taboo"])
 "This is an ******* text with few *****s"
 ```
