@@ -90,7 +90,7 @@ end
 ```sh
 >> BigBrotha::TabooPost.where(user: user)
 
-#<BigBrotha::TabooPost id: 1, content:  "I'm princessita", content_column: "User.column", user_id: 1>
+#<BigBrotha::TabooPost id: 1, content:  "I'm princessita", content_column: "User.username", user_id: 1>
 ```
 ## Additional methods
 Censor class contains additional method which you can use to censor text.
