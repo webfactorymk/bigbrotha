@@ -41,7 +41,7 @@ In *"config/initializers/bigbrother.rb"* you configure all the necessary places 
 Example configurations:
 ```sh
 BigBrotha.configure do |config|
- config.add(User, :self, [:username, :comment], :before, :save)
+ config.add(User, :self, [:username, :comment], :after, :save)
  config.add(Room, :sender, :message, :before, :update)
 end
 ```
@@ -70,7 +70,7 @@ You can edit the active admin pages as you want, for more info go to: [ActiveAdm
 1. Configure
 ```sh
 BigBrotha.configure do |config|
- config.add(User, :self, :username, :before, :save)
+ config.add(User, :self, :username, :after, :save)
 end
 ```
 2. Add Taboos
