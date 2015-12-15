@@ -33,7 +33,7 @@ Running the migrations will generate tables for two models: Taboo and TabooPost.
     *Find* taboo object by calling `BigBrotha.find_taboo(taboo_word)`.
 - **TabooPost**: where the content from the columns with taboos is saved, with reference to the user who created it and reference to all the taboos found in that content.
 
-**!** Before you run `db:migrate` make sure you have a **User** model that TabooPost can reference. 
+**!** Before you run `rake db:migrate` make sure you have a **User** model that TabooPost can reference. 
 
 #### Configuration
 In *"config/initializers/bigbrother.rb"* you configure all the necessary places where checks for taboos need to be done.
