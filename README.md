@@ -1,8 +1,7 @@
 # Bigbrotha
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bigbrotha`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Allows you to find taboo words, censor them and keep track of who is using them on every column in your ActiveRecord model.
+Optionally you can generate ActiveAdmin pages to import taboo words and keep track of the generated TabooPosts.
 
 ## Installation
 
@@ -22,7 +21,48 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Initialization
+In order to create migrations for the models and the setup file in initializers, use: 
+`bin/rails generate big_brotha:initializer`
+
+#### Migrations
+Running the migrations will generate tables for two models: Taboo and TabooPost. 
+- **Taboo**: is where all the taboo words are saved. 
+    You can *add* taboo word by calling `BigBrotha.add_taboo!(taboo_word)` method.
+    *Remove* taboo by calling `BigBrotha.remove_taboo(taboo_word)`.
+    *Find* taboo object by calling `BigBrotha.find_taboo(taboo_word)`.
+- **TabooPost**: where the content from the columns with taboos is saved, with reference to the user who created it and reference to all the taboos found in that content.
+
+**!** Before you run `db:migrate` make sure you have a **User** model that TabooPost can reference. 
+
+#### Configuration
+In *"config/initializers/bigbrother_setup.rb"* you configure all the necessary places where checks for taboos need to be run.
+
+Example configurations:
+```sh
+BigBrotha.configure do |config|
+ config.add(User, :self, [:username, :comment], :before, :save)
+ config.add(Room, :sender, :message, :before, :update)
+end
+```
+
+In the **add** method you have to set the following parameters: **Model**, **:relation_name**, **:column_names**, **:timing**, **:event**
+
+- **Model**: is the ActiveRecord model on which you want to append the callback function for taboo checks
+- **relation_name**: is the name of the relation to the User model that will be saved as the creator of the taboo post 
+- **column_names**: are the names of the columns in the Model, that need to be checked for any taboos
+- **timing**: indicates whether the callback is to be run :before, :after, or :around the event.
+- **event**: indicates around which event (:save, :update, :create ... ) the callback is to be run.
+
+
+
+### ActiveAdmin
+To create active admin pages for Taboos and TabooPosts run: `bin/rails generate big_brotha:active_admin`.
+
+Optionally you can add a button for importing taboos in csv format. To do this, you have to add
+`gem 'active_admin_importable'` to your Gemfile, run `bundle install` and uncomment in *"app/admin/taboo.rb"* the block that allows you this option. You can edit the active admin pages as you want, for more info go to: [ActiveAdmin](https://github.com/activeadmin/activeadmin) and [ActiveAdmin importable](https://github.com/krhorst/active_admin_importable).
+
+
 
 ## Development
 
