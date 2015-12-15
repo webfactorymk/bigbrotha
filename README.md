@@ -89,7 +89,7 @@ end
 #<BigBrotha::TabooPost id: 1, content:  "I'm princessita", content_column: "User.column", user_id: 1>
 ```
 ## Additional methods
-Censor class contains additional method with which you can use only to censor text.
+Censor class contains additional method which you can use to censor text.
 ```sh
 >> BigBrotha::Censor.censor_taboos_in_text("This is an example text with few taboos", ["example","taboo"])
 "This is an ******* text with few *****s"
