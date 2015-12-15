@@ -42,7 +42,7 @@ Example configurations:
 ```sh
 BigBrotha.configure do |config|
  config.add(User, :self, [:username, :comment], :after, :save)
- config.add(Room, :sender, :message, :before, :update)
+ config.add(Room, :creator, :message, :before, :update)
 end
 ```
 
