@@ -16,7 +16,7 @@ module BigBrotha
 
 
     def create_setup_file
-      template "initializers/bigbrother_setup.rb", "config/initializers/bigbrother_setup.rb"
+      template 'initializers/bigbrother.rb', 'config/initializers/bigbrother.rb'
     end
 
   end

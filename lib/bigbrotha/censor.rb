@@ -45,8 +45,8 @@ module BigBrotha
     end
 
 
-    def self.censor_taboos_in_text(text, taboos)
-      taboos.each do |taboo|
+    def self.censor_taboos_in_text(text, taboo_words)
+      taboo_words.each do |taboo|
         taboo_chars = taboo.scan(/./)
         regex = ""
         taboo_chars.each { |c| regex+= "[#{c.downcase}|#{c.upcase}]" } #build the regex to match upcase and downcase letters

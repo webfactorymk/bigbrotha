@@ -8,7 +8,7 @@ module BigBrotha
       columns = Array(columns)
       columns.each do |column|
         model.set_callback event.to_sym, timing.to_sym, ->(obj) {
-          column = column.to_s
+          column = model.to_s + "." + column.to_s
           creator = Config.get_value(obj, creator_column)
           column_value = Config.get_value(obj, column)
           censored_text = Censor.censor_text!(creator, column_value, column)
