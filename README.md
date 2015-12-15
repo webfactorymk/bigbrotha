@@ -28,7 +28,7 @@ In order to create migrations for the models and the setup file in initializers,
 #### Migrations
 Running the migrations will generate tables for two models: Taboo and TabooPost. 
 - **Taboo**: is where all the taboo words are saved. 
-    You can *add* taboo word by calling the method `BigBrotha.add_taboo!(taboo_word)`.
+    You can *Add* taboo word by calling the method `BigBrotha.add_taboo!(taboo_word)`.
     *Remove* taboo by calling `BigBrotha.remove_taboo(taboo_word)`.
     *Find* taboo object by calling `BigBrotha.find_taboo(taboo_word)`.
 - **TabooPost**: where the content from the columns with taboos is saved, with reference to the user who created it and reference to all the taboos found in that content.
