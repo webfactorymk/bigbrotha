@@ -36,7 +36,7 @@ Running the migrations will generate tables for two models: Taboo and TabooPost.
 **!** Before you run `db:migrate` make sure you have a **User** model that TabooPost can reference. 
 
 #### Configuration
-In *"config/initializers/bigbrother_setup.rb"* you configure all the necessary places where checks for taboos need to be run.
+In *"config/initializers/bigbrother.rb"* you configure all the necessary places where checks for taboos need to be run.
 
 Example configurations:
 ```sh
@@ -74,21 +74,26 @@ BigBrotha.configure do |config|
 end
 ```
 2. Add Taboos
-`BigBrotha.add_taboo!("princess")`
+`>> BigBrotha.add_taboo!("princess")`
 3. Create User
-`user = User.create(username: "I'm princessita")`
+`>> user = User.create(username: "I'm princessita")`
 4. Result
 ```sh
-user.username
+>> user.username
 "I'm *******ita"
 ```
 5. Check TabooPost
 ```sh
-BigBrotha::TabooPost.where(user: user)
+>> BigBrotha::TabooPost.where(user: user)
 
 #<BigBrotha::TabooPost id: 1, content:  "I'm princessita", content_column: "User.column", user_id: 1>
 ```
-
+## Additional methods
+Censor class contains additional method with which you can use only to censor text.
+```
+>> BigBrotha::Censor.censor_taboos_in_text("This is an example text with few taboos", ["example","taboo"])
+"This is an ******* text with few *****s"
+```
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
