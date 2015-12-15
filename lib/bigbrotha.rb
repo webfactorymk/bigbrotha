@@ -2,8 +2,14 @@ require 'bigbrotha/version'
 require 'bigbrotha/models/taboo'
 require 'bigbrotha/models/taboo_post'
 require 'bigbrotha/censor'
+require 'bigbrotha/config'
+require 'bigbrotha/errors'
 
 module BigBrotha
+
+  def self.configure
+    yield(Config.new)
+  end
 
   def self.add_taboo!(keyword)
     Taboo.create!(keyword: keyword)

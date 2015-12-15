@@ -15,13 +15,9 @@ module BigBrotha
     end
 
 
-
-
-
-    # def create_models
-    #   template "models/taboo.rb", "app/models/taboo.rb"
-    #   template "models/taboo_post.rb", "app/models/taboo_post.rb"
-    # end
+    def create_setup_file
+      template "initializers/bigbrother_setup.rb", "config/initializers/bigbrother_setup.rb"
+    end
 
   end
 end
