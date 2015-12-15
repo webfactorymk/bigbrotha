@@ -13,7 +13,7 @@ module BigBrotha
           column_value = Config.get_value(obj, column)
           censored_text = Censor.censor_text!(creator, column_value, content_column)
 
-          obj.send(column+"=", censored_text) #update the object's column with the censored word
+          obj.send(column.to_s+"=", censored_text) #update the object's column with the censored word
           obj.update_column(column, censored_text) if creator == self
         }
       end
