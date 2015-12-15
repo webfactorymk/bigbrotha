@@ -49,7 +49,8 @@ end
 In the **add** method you have to set the following parameters: **Model**, **:relation_name**, **:column_names**, **:timing**, **:event**
 
 - **Model**: is the ActiveRecord model on which you want to append the callback function for taboo checks
-- **relation_name**: is the name of the relation to the User model that will be saved as the creator of the taboo post 
+- **relation_name**: is the name of the relation to the User model that will be saved as the creator of the taboo post. 
+           The **:self** symbol can be passed **only** for **User** model and for **:create** has to be called with timing **:after**, otherwise user_id won't be added to the TabooPost object.
 - **column_names**: are the names of the columns in the Model, that need to be checked for any taboos
 - **timing**: indicates whether the callback is to be run :before, :after, or :around the event.
 - **event**: indicates around which event (:save, :update, :create ... ) the callback is to be run.
@@ -84,6 +85,8 @@ user.username
 5. Check TabooPost
 ```sh
 BigBrotha::TabooPost.where(user: user)
+
+#<BigBrotha::TabooPost id: 1, content:  "I'm princessita", content_column: "User.column", user_id: 1>
 ```
 
 ## Development
