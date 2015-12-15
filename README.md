@@ -67,22 +67,26 @@ The *csv files* in the first line, have to contain the word: **keyword**
 You can edit the active admin pages as you want, for more info go to: [ActiveAdmin](https://github.com/activeadmin/activeadmin) and [ActiveAdmin importable](https://github.com/krhorst/active_admin_importable).
 
 ### Full Example
-1. Configure
+1.Configure
 ```sh
 BigBrotha.configure do |config|
  config.add(User, :self, :username, :after, :save)
 end
 ```
-2. Add Taboos
-`>> BigBrotha.add_taboo!("princess")`
-3. Create User
-`>> user = User.create(username: "I'm princessita")`
-4. Result
+2.Add Taboos
+```sh
+>> BigBrotha.add_taboo!("princess")
+```
+3.Create User
+```sh
+>> user = User.create(username: "I'm princessita")
+```
+4.Result
 ```sh
 >> user.username
 "I'm *******ita"
 ```
-5. Check TabooPost
+5.Check TabooPost
 ```sh
 >> BigBrotha::TabooPost.where(user: user)
 
