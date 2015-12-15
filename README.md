@@ -1,6 +1,6 @@
 # Bigbrotha
 
-Allows you to find taboo words, censor them and keep track of who is using them on every column in your ActiveRecord model.
+Allows you to find taboo words, censor them and keep track of who created them.
 Optionally you can generate ActiveAdmin pages to import taboo words and keep track of the generated TabooPosts.
 
 ## Installation
@@ -60,9 +60,31 @@ In the **add** method you have to set the following parameters: **Model**, **:re
 To create active admin pages for Taboos and TabooPosts run: `bin/rails generate big_brotha:active_admin`.
 
 Optionally you can add a button for importing taboos in csv format. To do this, you have to add
-`gem 'active_admin_importable'` to your Gemfile, run `bundle install` and uncomment in *"app/admin/taboo.rb"* the block that allows you this option. You can edit the active admin pages as you want, for more info go to: [ActiveAdmin](https://github.com/activeadmin/activeadmin) and [ActiveAdmin importable](https://github.com/krhorst/active_admin_importable).
+`gem 'active_admin_importable'` to your Gemfile, run `bundle install` and uncomment in *"app/admin/taboo.rb"* the block that allows you this option. 
+The *csv files* in the first line, have to contain the word: **keyword**
 
+You can edit the active admin pages as you want, for more info go to: [ActiveAdmin](https://github.com/activeadmin/activeadmin) and [ActiveAdmin importable](https://github.com/krhorst/active_admin_importable).
 
+### Full Example
+1. Configure
+```sh
+BigBrotha.configure do |config|
+ config.add(User, :self, :username, :before, :save)
+end
+```
+2. Add Taboos
+`BigBrotha.add_taboo!("princess")`
+3. Create User
+`user = User.create(username: "I'm princessita")`
+4. Result
+```sh
+user.username
+"I'm *******ita"
+```
+5. Check TabooPost
+```sh
+BigBrotha::TabooPost.where(user: user)
+```
 
 ## Development
 
@@ -72,7 +94,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/bigbrotha. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/SnezanaDichevska/bigbrotha. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
 ## License
