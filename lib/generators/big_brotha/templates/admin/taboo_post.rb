@@ -41,4 +41,11 @@ ActiveAdmin.register BigBrotha::TabooPost, as: 'TabooPost' do
     end
   end
 
+  controller do
+    # prevent N+1 queries
+    def scoped_collection
+      BigBrotha::TabooPost.includes(:user)
+    end
+  end
+
 end
