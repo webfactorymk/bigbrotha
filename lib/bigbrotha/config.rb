@@ -2,21 +2,32 @@ module BigBrotha
 
   class Config
 
-    #The forth argument (timing) indicates whether the callback is to be run :before, :after, or :around the event(:save, :create ...).
+    #The argument :timing indicates whether the callback is to be run :before, :after the event(:save, :create, :update).
     def add(model, creator_column, columns = [], timing, event)
       raise NotActiveRecordModel.new unless model < ActiveRecord::Base
       columns = Array(columns)
-      columns.each do |column|
-        model.set_callback event.to_sym, timing.to_sym, ->(obj) {
+      event = event.to_sym
+      timing = timing.to_sym
+
+      model.set_callback event, timing, ->(obj) {
+        changed_columns = event == :create ? columns : columns.map { |c| c.to_s } & obj.changed
+        censored_texts = {}
+
+        changed_columns.each do |column|
           content_column = model.to_s + "." + column.to_s
           creator = Config.get_value(obj, creator_column)
           column_value = Config.get_value(obj, column)
           censored_text = Censor.censor_text!(creator, column_value, content_column)
+          censored_texts[column] = censored_text
+        end
 
-          obj.send(column.to_s+"=", censored_text) #update the object's column with the censored word
-          obj.update_column(column, censored_text) if creator == self
-        }
-      end
+        if timing == :after
+          obj.update_columns(censored_texts)
+        elsif timing == :before
+          censored_texts.each {|k,v| obj.send(k.to_s+"=", v)}
+        end
+      }
+
     end
 
     def self.get_value(obj, column)

@@ -1,6 +1,7 @@
 require 'bigbrotha/version'
 require 'bigbrotha/models/taboo'
 require 'bigbrotha/models/taboo_post'
+require 'bigbrotha/models/taboo_posts_taboo'
 require 'bigbrotha/censor'
 require 'bigbrotha/config'
 require 'bigbrotha/errors'

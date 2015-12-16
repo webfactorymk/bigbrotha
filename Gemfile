@@ -6,3 +6,4 @@ gemspec
 # Active Admin is a Ruby on Rails framework for creating elegant backends for website administration
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_admin_importable'
+gem 'activerecord-import'

@@ -11,15 +11,17 @@ module BigBrotha
       return post if post.nil?
 
       censored_post = post
-      taboos = Taboo.all
+      taboos = Taboo.all.to_a
       words = post.split(/[\s]/).delete_if(&:blank?) #split by spaces
+      new_taboo_post = nil
+      all_appeared_taboos = []
 
       words.each do |word|
         appeared_taboos = find_taboos_in_text(word, taboos)
 
         unless appeared_taboos.blank?
-          new_taboo_post = TabooPost.find_or_create_by(content: post, content_column: content_column, user_id: user.id)
-          new_taboo_post.taboos += appeared_taboos
+          new_taboo_post = TabooPost.create(content: post, content_column: content_column, user_id: user.id) if new_taboo_post.blank?
+          all_appeared_taboos += appeared_taboos
 
           #censor all taboos appearing in one word
           censored_word = censor_taboos_in_text(word, appeared_taboos.map{|t| t.keyword})
@@ -29,8 +31,10 @@ module BigBrotha
         end
 
       end
+      new_taboo_post.set_taboos(all_appeared_taboos) unless new_taboo_post.blank?
       censored_post
     end
+
 
     def self.find_taboos_in_text(text, taboos)
       return nil if text.blank? or taboos.blank?
