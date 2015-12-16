@@ -2,7 +2,7 @@ ActiveAdmin.register BigBrotha::TabooPost, as: 'TabooPost' do
 
   menu :parent => "Taboos", :priority => 1
   config.filters = false
-  actions :all, :except => [:destroy, :edit]
+  actions :all, :except => [:destroy, :edit, :new]
 
   index do
     selectable_column
