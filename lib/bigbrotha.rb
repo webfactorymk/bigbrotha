@@ -5,6 +5,7 @@ require 'bigbrotha/models/taboo_posts_taboo'
 require 'bigbrotha/censor'
 require 'bigbrotha/config'
 require 'bigbrotha/errors'
+require 'activerecord-import'
 
 module BigBrotha
 
